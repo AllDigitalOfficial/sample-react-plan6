@@ -6,6 +6,11 @@ const Deposit = () => {
   const depositTextColor =
     import.meta.env.VITE_APP_DEPOSIT_TEXT_COLOR || "#000000";
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
+  const textrestricColor = import.meta.env.VITE_APP_TEXT_RESTRICTED_COLOR || "#000000";
+  const depositCardBgColor = import.meta.env.VITE_APP_DEPOSIT_CARD_BG_COLOR || "#f8f9fa";
+  const depositBorderColor = import.meta.env.VITE_APP_DEPOSIT_BORDER_COLOR || "#dee2e6";
+  const textred = import.meta.env.VITE_APP_TEXT_RED_COLOR || "#ff0000";
+  const depositCardTextColor = import.meta.env.VITE_APP_DEPOSIT_CARD_TEXT_COLOR || "#000000";
   const minDeposit = import.meta.env.VITE_APP_MIN_DEPOSIT || 0.05;
   const maxDeposit = import.meta.env.VITE_APP_MAX_DEPOSIT || 1000;
   const perDayIncome = import.meta.env.VITE_APP_DEPOSIT_INCOME || 0.0;
@@ -21,6 +26,8 @@ const Deposit = () => {
 
   const cardStyle = {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
+    backgroundColor: depositCardBgColor,
+   
   };
 
   return (
@@ -37,7 +44,7 @@ const Deposit = () => {
               <h2 style={{ color: depositTextColor }} className="mb-4">
                 Deposit
               </h2>
-              <h4>Make New</h4>
+              <h4 style={{ color: depositTextColor }}>Make New</h4>
               <Form>
                 <Form.Group className="mb-3">
                   <div className="input-group">
@@ -62,9 +69,9 @@ const Deposit = () => {
                 >
                   MAKE DEPOSIT
                 </Button>
-                <div className="text-muted">
-                  <p>Minimum {minDeposit} BNB</p>
-                  <p>Maximum {maxDeposit} BNB</p>
+                <div className="text-muted d-flex gap-4" >
+                  <p style={{ color: textred }}>Minimum {minDeposit} BNB</p>
+                  <p style={{ color: textred }}>Maximum {maxDeposit} BNB</p>
                 </div>
               </Form>
             </div>
@@ -73,34 +80,34 @@ const Deposit = () => {
           {/* Summary Cards Section */}
           <Col lg={6} md={12}>
             <Col className="mb-4">
-              <Col>
+              <Col className="mb-4">
                 <Card style={cardStyle} className="text-center">
                   <Card.Body>
-                    <h4>Per Day</h4>
-                    <p id="perDayIncome" className="fs-4 fw-bold">
+                    <h4 style={{ color: depositCardTextColor }}>Per Day</h4>
+                    <p id="perDayIncome" style={{ color: textrestricColor }}className="fs-4 fw-bold">
                       {perDayIncome} BNB
                     </p>
                   </Card.Body>
                 </Card>
               </Col>
-              <Col>
+              <Col className="mb-4">
                 <Card style={cardStyle} className="text-center">
                   <Card.Body>
-                    <h4>Percent Rate</h4>
-                    <p className="fs-4">
+                    <h4 style={{ color: depositCardTextColor }}>Percent Rate</h4>
+                    <p style={{ color: textrestricColor }} className="fs-4">
                       <span id="base-percentage">{percentRate}%</span>
                     </p>
                   </Card.Body>
                 </Card>
               </Col>
-              <Col>
+              <Col className="mb-4">
                 <Card style={cardStyle} className="text-center">
                   <Card.Body>
-                    <h4>Total Income</h4>
-                    <p id="totalIncome" className="fs-4 fw-bold">
+                    <h4 style={{ color: depositCardTextColor }}>Total Income</h4>
+                    <p id="totalIncome"  style={{ color: textrestricColor }}className="fs-4 fw-bold">
                       {totalIncome} BNB
                     </p>
-                    <small className="text-muted">
+                    <small style={{ color: textrestricColor }}>
                       * Withdrawal at any time you want!
                     </small>
                   </Card.Body>

@@ -21,12 +21,12 @@ const App: React.FC = () => {
       favicon.href = import.meta.env.VITE_APP_FAVICON_ICON || "";
     }
   }, []);
-
+  const bgColor = import.meta.env.VITE_APP_BG_COLOR || "#f8f9fa"; // Default background color
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: bgColor }}>
       <Navbars />
 
-      <div className="container my-4">
+      <div className="w-100" style={{ height: "60vh",marginTop:"5rem" }}>
         <HeroSection />
       </div>
 
@@ -54,7 +54,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="col-lg-12 col-md-12 mb-4">
+      <div className="col-lg-12 col-md-12 ">
         <Copyright />
       </div>
     </div>

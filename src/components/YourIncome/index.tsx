@@ -5,6 +5,7 @@ const ReferralLinkData = () => {
   const bgColor = import.meta.env.VITE_APP_REFERRAL_LINK_BG_COLOR || "#f8f9fa"; // Default background color
   const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000"; // Default text color
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff"; // Default button color
+  const lightwhiteColor = import.meta.env.VITE_APP_LIGHT_WHITE_COLOR || "#f8f9fa"; // Default color for light white
   const totalDepositColor =
     import.meta.env.VITE_APP_TOTAL_DEPOSIT_COLOR || "#28a745"; // Default color for Total Deposit card
   const totalWithdrawnColor =
@@ -17,6 +18,7 @@ const ReferralLinkData = () => {
   // Centralized styles
   const cardStyle = {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
+    backgroundColor: bgColor,
   };
 
   const buttonStyle = {
@@ -26,7 +28,7 @@ const ReferralLinkData = () => {
   };
 
   return (
-    <div className="expart-team-area py-5" style={{ backgroundColor: bgColor }}>
+    <div className="expart-team-area py-5 " style={{ backgroundColor: bgColor }}>
       <Container>
         <Row className="mb-4 justify-content-center">
           {/* Left Section: Income and Referral Info */}
@@ -41,7 +43,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span className="text-muted">BNB</span>
+                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
                 <Button id="withdraw-button" style={buttonStyle}>
                   Withdrawal
@@ -57,7 +59,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span className="text-muted">BNB</span>
+                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
               </div>
 
@@ -70,7 +72,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span className="text-muted">BNB</span>
+                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
               </div>
             </Card>

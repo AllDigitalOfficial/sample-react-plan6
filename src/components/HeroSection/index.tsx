@@ -1,41 +1,39 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
+import bgimage from "../../assets/slider.jpg";
 
 const HeroSection = () => {
   // Environment variable values
-  const heroBgColor = import.meta.env.VITE_APP_HERO_BG_COLOR || "#f8f9fa";
   const heroTextColor = import.meta.env.VITE_APP_HERO_TEXT_COLOR || "#000000";
-  const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
+  const textHeadingColor = import.meta.env.VITE_APP_TEXT_HEADING_COLOR || "#000000";
 
-  const contractBalanceColor =
-    import.meta.env.VITE_APP_CONTRACT_BALANCE_COLOR || "#ffc107";
   const withdrawnColor = import.meta.env.VITE_APP_WITHDRAWN_COLOR || "#ffc107";
   const presentationLink =
     import.meta.env.VITE_APP_PRESENTATION_LINK || "P3 BNBCLUB PPTV.pdf";
   const depositLink = import.meta.env.VITE_APP_DEPOSIT_LINK || "#deposit";
 
-  // Style objects for better reusability
   const buttonStyle = {
-    backgroundColor: buttonColor,
-    color: "#fff",
+    backgroundColor: textHeadingColor,
+    color: "#000",  
+    fontWeight: "bold",
+    
   };
 
 
   const cardStyle = {
-    backgroundColor: "#fff",
     color: heroTextColor,
     padding: "1.5rem",
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
     borderRadius: "0.5rem",
-    border: "1px solid #dee2e6",
+    // border: "1px solid #dee2e6",
   };
 
   return (
-    <Container style={{ backgroundColor: heroBgColor }} className="py-5">
+    <Container style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} className="w-100 h-100">
       <Row className="g-4">
         {/* Left Section: Profit Info */}
         <Col lg={6} md={6} className="d-flex align-items-stretch">
           <div style={cardStyle} className="d-flex flex-column w-100">
-            <h2 className="fw-bold mb-4">BNB: Pioneering a decentralized tomorrow</h2>
+            <h2 className="fw-bold mb-4" style={{ color: textHeadingColor }}>BNB: Pioneering a decentralized tomorrow</h2>
             <div>
               <p className="mb-3">
                 <strong>Basic interest rate:</strong>{" "}
@@ -56,15 +54,15 @@ const HeroSection = () => {
             </div>
             <div className="d-flex gap-3 mt-4 justify-content-center">
               <Button
-                href={presentationLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={buttonStyle}
+              href={presentationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ ...buttonStyle, height: '50px', width: '150px' }}
               >
-                Presentation
+              Presentation
               </Button>
-              <Button href={depositLink} style={buttonStyle}>
-                Deposit
+              <Button href={depositLink} style={{ ...buttonStyle, height: '50px', width: '150px' }}>
+              Deposit
               </Button>
             </div>
           </div>
@@ -74,17 +72,17 @@ const HeroSection = () => {
         <Col lg={6} md={6} className="d-flex align-items-stretch">
           <div style={cardStyle} className="d-flex flex-column justify-content-center w-100">
             <div className="mb-4">
-              <h4>Contract Balance</h4>
+              <h1>Contract Balance</h1>
               <p
                 id="contract-balance"
                 className="fs-5 fw-bold"
-                style={{ color: contractBalanceColor }}
+                style={{ color: textHeadingColor }}
               >
                 0.000
               </p>
             </div>
             <div>
-              <h4>Total Withdrawn</h4>
+              <h1>Total Withdrawn</h1>
               <p
                 id="withdrawandata"
                 className="fs-5 fw-bold"
