@@ -1,3 +1,5 @@
+import { Container, Row, Col, Card } from "react-bootstrap";
+
 const Levels = () => {
   // Get environment variable values
   const sectionBgColor =
@@ -14,45 +16,39 @@ const Levels = () => {
       className="user-details-wrapper py-5"
       style={{ backgroundColor: sectionBgColor }}
     >
-      <div className="container">
-        <h2 className="mb-4" style={{ color: titleColor }}>
+      <Container>
+        <h2 className="mb-4 text-center" style={{ color: titleColor }}>
           Levels
         </h2>
-        <div className="row">
+        <Row>
           {Array.from({ length: 15 }, (_, index) => {
             const level = index + 1;
             const percentage = level === 1 ? "5%" : level === 2 ? "4%" : "1%";
 
             return (
-              <div key={level} className="col-md-4 col-lg-3 mb-4">
-                <div
-                  className="card shadow-sm p-3"
+              <Col key={level} md={4} lg={3} className="mb-4">
+                <Card
+                  className="shadow-sm p-3"
                   style={{
                     backgroundColor: cardBgColor,
                     color: cardTextColor,
                   }}
                 >
-                  <div className="card-body">
+                  <Card.Body>
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <span>Level {level}</span>
-                      <em
-                        style={{
-                          color: percentageColor,
-                        }}
-                      >
-                        {percentage}
-                      </em>
+                      <em style={{ color: percentageColor }}>{percentage}</em>
                     </div>
                     <h3 id={`level-${level}`} className="text-center">
                       0
                     </h3>
-                  </div>
-                </div>
-              </div>
+                  </Card.Body>
+                </Card>
+              </Col>
             );
           })}
-        </div>
-      </div>
+        </Row>
+      </Container>
     </section>
   );
 };

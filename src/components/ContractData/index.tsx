@@ -1,3 +1,4 @@
+import { Container, Row, Col } from "react-bootstrap";
 const ContractData = () => {
   // Get color values from environment variables
   const contractBalanceColor =
@@ -7,9 +8,9 @@ const ContractData = () => {
   const cardBorderColor = import.meta.env.VITE_APP_CARD_BORDER_COLOR || "#dee2e6"; // Default to light border color
 
   return (
-    <div className="container py-5">
-      <div className="row mb-4">
-        <div className="col-12">
+    <Container>
+      <Row className="mb-4">
+        <Col>
           <div
             className="card p-4 shadow-sm"
             style={{
@@ -17,22 +18,22 @@ const ContractData = () => {
               borderColor: cardBorderColor,
             }}
           >
-            <h3 className="card-title mb-3" style={{ color: cardTextColor }}>
+            <h3 className="card-title mb-3 text-center" style={{ color: cardTextColor }}>
               Current Contract Balance
             </h3>
             <span
-              id="contract-balance2"
-              className="fs-4 fw-bold"
+              id="contract-balance2 "
+              className="fs-4 fw-bold text-center"
               style={{ color: contractBalanceColor }}
             >
               0.000 BNB
             </span>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className="row g-4 d-flex align-items-stretch">
-        <div className="col-md-6 col-lg-3">
+      <Row>
+        <Col>
           <div
             className="card p-4 text-center shadow-sm h-100"
             style={{
@@ -47,9 +48,9 @@ const ContractData = () => {
             <p className="text-muted">BNB</p>
             <i className="bi bi-wallet2 fs-3 text-primary"></i>
           </div>
-        </div>
+        </Col>
 
-        <div className="col-md-6 col-lg-3">
+        <Col>
           <div
             className="card p-4 text-center shadow-sm h-100"
             style={{
@@ -63,9 +64,9 @@ const ContractData = () => {
             </p>
             <i className="bi bi-person-circle fs-3 text-primary"></i>
           </div>
-        </div>
+        </Col>
 
-        <div className="col-md-6 col-lg-3">
+        <Col>
           <div
             className="card p-4 text-center shadow-sm h-100"
             style={{
@@ -80,9 +81,9 @@ const ContractData = () => {
             <p className="text-muted">BNB</p>
             <i className="bi bi-arrow-down-circle fs-3 text-primary"></i>
           </div>
-        </div>
+        </Col>
 
-        <div className="col-md-6 col-lg-3">
+        <Col>
           <div
             className="card p-4 text-center shadow-sm h-100"
             style={{
@@ -97,9 +98,9 @@ const ContractData = () => {
             <p className="text-muted">BNB</p>
             <i className="bi bi-gift fs-3 text-primary"></i>
           </div>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

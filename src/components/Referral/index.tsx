@@ -1,3 +1,5 @@
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+
 const Referral = () => {
   // Get environment variable values
   const bgColor = import.meta.env.VITE_APP_REFERRAL_BG_COLOR || "#f8f9fa"; // Default background color
@@ -11,9 +13,9 @@ const Referral = () => {
 
   return (
     <div className="roadmap-area py-5" style={{ backgroundColor: bgColor }}>
-      <div className="container">
+      <Container>
         <div className="referral">
-          <h2 className="mb-4" style={{ color: textColor }}>
+          <h2 className="mb-4 text-center" style={{ color: textColor }}>
             Referral
           </h2>
 
@@ -26,9 +28,10 @@ const Referral = () => {
             >
               You will get your ref link after investing...
             </span>
-            <button
+            <Button
               id="copyButton"
-              className="btn btn-outline-primary ms-3"
+              variant="outline-primary"
+              className="ms-3"
               style={{
                 borderColor: buttonColor,
                 color: buttonColor,
@@ -46,37 +49,41 @@ const Referral = () => {
               }}
             >
               Copy
-            </button>
+            </Button>
           </div>
 
           {/* Referral Stats Section */}
-          <div className="row">
-            <div className="col-md-6 mb-3">
-              <div
-                className="card shadow-sm p-3"
+          <Row>
+            <Col md={6} className="mb-3">
+              <Card
+                className="shadow-sm p-3"
                 style={{ backgroundColor: cardBgColor, color: cardTextColor }}
               >
-                <h3>Total Reward</h3>
-                <p id="usertotalreferralbonus" className="fs-4 fw-bold">
-                  0.000 BNB
-                </p>
-              </div>
-            </div>
+                <Card.Body>
+                  <h3>Total Reward</h3>
+                  <p id="usertotalreferralbonus" className="fs-4 fw-bold">
+                    0.000 BNB
+                  </p>
+                </Card.Body>
+              </Card>
+            </Col>
 
-            <div className="col-md-6 mb-3">
-              <div
-                className="card shadow-sm p-3"
+            <Col md={6} className="mb-3">
+              <Card
+                className="shadow-sm p-3"
                 style={{ backgroundColor: cardBgColor, color: cardTextColor }}
               >
-                <h3>Total Referral</h3>
-                <p id="countdownline" className="fs-4 fw-bold">
-                  0
-                </p>
-              </div>
-            </div>
-          </div>
+                <Card.Body>
+                  <h3>Total Referral</h3>
+                  <p id="countdownline" className="fs-4 fw-bold">
+                    0
+                  </p>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
