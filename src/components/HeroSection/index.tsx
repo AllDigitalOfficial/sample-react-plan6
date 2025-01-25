@@ -15,7 +15,12 @@ const HeroSection = () => {
     backgroundColor: textHeadingColor,
     color: "#000",  
     fontWeight: "bold",
-    
+    border: "none",
+    height: '60px', 
+    width: '170px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   };
 
 
@@ -57,11 +62,11 @@ const HeroSection = () => {
               href={presentationLink}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ ...buttonStyle, height: '50px', width: '150px' }}
+              style={{ ...buttonStyle }}
               >
               Presentation
               </Button>
-              <Button href={depositLink} style={{ ...buttonStyle, height: '50px', width: '150px' }}>
+              <Button href={depositLink} style={{ ...buttonStyle}}>
               Deposit
               </Button>
             </div>
@@ -72,7 +77,7 @@ const HeroSection = () => {
         <Col lg={6} md={6} className="d-flex align-items-stretch">
           <div style={cardStyle} className="d-flex flex-column justify-content-center w-100">
             <div className="mb-4">
-              <h1>Contract Balance</h1>
+              <h1 style={{fontWeight: 'bold'}}>Contract Balance</h1>
               <p
                 id="contract-balance"
                 className="fs-5 fw-bold"
@@ -82,7 +87,7 @@ const HeroSection = () => {
               </p>
             </div>
             <div>
-              <h1>Total Withdrawn</h1>
+              <h1 style={{fontWeight: 'bold'}}>Total Withdrawn</h1>
               <p
                 id="withdrawandata"
                 className="fs-5 fw-bold"

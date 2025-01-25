@@ -28,7 +28,6 @@ const ReferralLinkData = () => {
   };
 
   return (
-    <div className="expart-team-area py-5 " style={{ backgroundColor: bgColor }}>
       <Container>
         <Row className="mb-4 justify-content-center">
           {/* Left Section: Income and Referral Info */}
@@ -142,7 +141,7 @@ const ReferralLinkData = () => {
           </Col>
         </Row>
       </Container>
-    </div>
+
   );
 };
 

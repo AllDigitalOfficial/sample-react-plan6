@@ -13,8 +13,7 @@ const Navbars = () => {
   return (
     <>
       <Navbar
-        bg="dark"
-        variant="dark"
+
         expand="lg"
         className="py-3 sticky-top"
         style={{
