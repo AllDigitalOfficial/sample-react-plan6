@@ -10,6 +10,7 @@ const Levels = () => {
     import.meta.env.VITE_APP_LEVEL_CARD_TEXT_COLOR || "#000000";
   const percentageColor =
     import.meta.env.VITE_APP_LEVEL_PERCENTAGE_COLOR || "#007bff";
+  const totalLevels = import.meta.env.VITE_APP_TOTAL_LEVEL_LENGTH || 15;
 
   return (
     <section
@@ -20,10 +21,11 @@ const Levels = () => {
         <h2 className="mb-4 text-center" style={{ color: titleColor }}>
           Levels
         </h2>
+      
         <Row>
-          {Array.from({ length: 15 }, (_, index) => {
+          {Array.from({ length: totalLevels }, (_, index) => {
             const level = index + 1;
-            const percentage = level === 1 ? "5%" : level === 2 ? "4%" : "1%";
+            const percentage = import.meta.env[`VITE_APP_LEVEL_${level}_PERCENTAGE`] || "1";
 
             return (
               <Col key={level} md={4} lg={3} className="mb-4">
@@ -37,7 +39,7 @@ const Levels = () => {
                   <Card.Body>
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <span>Level {level}</span>
-                      <em style={{ color: percentageColor }}>{percentage}</em>
+                      <em style={{ color: percentageColor }}>{percentage}%</em>
                     </div>
                     <h3 id={`level-${level}`} className="text-center">
                       0

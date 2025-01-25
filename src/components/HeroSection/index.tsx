@@ -5,15 +5,17 @@ const HeroSection = () => {
   // Environment variable values
   const heroTextColor = import.meta.env.VITE_APP_HERO_TEXT_COLOR || "#000000";
   const textHeadingColor = import.meta.env.VITE_APP_TEXT_HEADING_COLOR || "#000000";
-
+  const buttoncolor = import.meta.env.VITE_APP_HEROSECTION_BUTTON_TEXT_COLOR || "#007bff";
   const withdrawnColor = import.meta.env.VITE_APP_WITHDRAWN_COLOR || "#ffc107";
   const presentationLink =
     import.meta.env.VITE_APP_PRESENTATION_LINK || "P3 BNBCLUB PPTV.pdf";
   const depositLink = import.meta.env.VITE_APP_DEPOSIT_LINK || "#deposit";
-
+  const basicInterestRate = import.meta.env.VITE_APP_BASIC_INTEREST_RATE || "1.5";
+  const heightLightTextColor = import.meta.env.VITE_APP_HEIGHTLIGHT_TEXT_COLOR || "#0d6efd";
+  const herosectiontitletext = import.meta.env.VITE_APP_HEROSECTION_TITLE_TEXT || "BNB: Pioneering a decentralized tomorrow";
   const buttonStyle = {
     backgroundColor: textHeadingColor,
-    color: "#000",  
+    color: buttoncolor,  
     fontWeight: "bold",
     border: "none",
     height: '60px', 
@@ -38,21 +40,24 @@ const HeroSection = () => {
         {/* Left Section: Profit Info */}
         <Col lg={6} md={6} className="d-flex align-items-stretch">
           <div style={cardStyle} className="d-flex flex-column w-100">
-            <h2 className="fw-bold mb-4" style={{ color: textHeadingColor }}>BNB: Pioneering a decentralized tomorrow</h2>
+            <h2 className="fw-bold mb-4" style={{ color: textHeadingColor }}>{herosectiontitletext}</h2>
             <div>
               <p className="mb-3">
                 <strong>Basic interest rate:</strong>{" "}
-                <span className="text-primary">1.5% every 24 hrs</span>
+               
+              <span style={{ color: heightLightTextColor }}>
+                {basicInterestRate}% every 24 hrs
+              </span>
               </p>
               <p className="mb-3">
                 <strong>Personal hold-bonus:</strong>{" "}
-                <span className="text-primary">
+                <span style={{ color: heightLightTextColor }}>
                   +0.1% for every 24 hrs without withdrawal
                 </span>
               </p>
               <p className="mb-3">
                 <strong>Contract total amount bonus:</strong>{" "}
-                <span className="text-primary">
+                <span style={{ color: heightLightTextColor }}>
                   +0.1% for every 500 BNB on platform address balance
                 </span>
               </p>
