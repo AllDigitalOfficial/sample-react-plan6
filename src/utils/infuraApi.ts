@@ -5,8 +5,8 @@ export const fetchContractData = async () => {
   try {
     const provider = new ethers.JsonRpcProvider(INFURA_API_URL);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-    const walletAddress = "0x98B137209686a67f030E123e1E1d828eDA78087A";
-    const ownerAddress = "0x98B137209686a67f030E123e1E1d828eDA780872";
+    const walletAddress = import.meta.env.VITE_APP_WALLER_ADDRESS;
+    const ownerAddress = import.meta.env.VITE_APP_OWNER_ADDRESS;
     const contractBalance = await contract.getContractBalance(); 
     const totalDeposits = await contract.totalInvested(); 
     const totalUsers = await contract.totalUsers();       

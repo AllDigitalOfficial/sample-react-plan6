@@ -4,7 +4,7 @@ import { ContractDataProvider } from "./components/context/ContractDataContext";
 import {
   ContractData,
   HeroSection,
-  Copyright,
+  Footer,
   Deposit,
   Levels,
   Navbars,
@@ -63,8 +63,8 @@ const App: React.FC = () => {
       <Navbars />
       <div className="container">
         <div
-          className="col-lg-12 col-md-12 mb-4"
-          style={{ height: "60vh", marginTop: "5rem" }}
+          className="col-lg-12 col-md-12 mt-4 mb-9"
+        
         >
           <HeroSection />
         </div>
@@ -85,14 +85,12 @@ const App: React.FC = () => {
           <Referral />
         </div>
 
-        <div className="col-lg-12 col-md-12 mb-4">
+        <div className="col-lg-12 col-md-12 ">
           <Levels />
         </div>
       </div>
 
-      <div className="col-lg-12 col-md-12">
-        <Copyright />
-      </div>
+   
 
       {/* Back to top button */}
       {showButton && (
@@ -115,7 +113,11 @@ const App: React.FC = () => {
           <FontAwesomeIcon icon={faArrowUp} />
         </Button>
       )}
+        <div className="col-lg-12 col-md-12">
+        <Footer />
+      </div>
     </div>
+  
     </ContractDataProvider>
   );
 };

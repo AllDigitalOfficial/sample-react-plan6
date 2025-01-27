@@ -1,4 +1,4 @@
-const Copyright = () => {
+const Footer = () => {
   // Get environment variable values
   const copyrightText =
     import.meta.env.VITE_APP_COPYRIGHT_TEXT || "Default Copyright Text.";
@@ -14,4 +14,4 @@ const Copyright = () => {
   );
 };
 
-export default Copyright;
+export default Footer;

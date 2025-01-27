@@ -32,10 +32,10 @@ const Referral = () => {
             <div className="d-flex align-items-center justify-content-center mb-4">
             <span
               id="referralLink"
-              className="fs-5 "
-              style={{ color: lightwhiteColor }}
+              className="fs-5 text-wrap"
+              style={{ color: lightwhiteColor, wordBreak: "break-word" }}
             >
-             { data?.referralLink || "You will get your ref link after investing" }
+              {data?.referralLink || "You will get your ref link after investing"}
             </span>
             <Button
               id="copyButton"

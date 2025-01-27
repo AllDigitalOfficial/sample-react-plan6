@@ -1,6 +1,6 @@
 import ContractData from "./ContractData";
 import HeroSection from "./HeroSection";
-import Copyright from "./Copyright";
+import Footer from "./Footer";
 import Deposit from "./Deposit";
 import Levels from "./Levels";
 import Navbars from "./Navbar";
@@ -10,7 +10,7 @@ import ReferralLinkData from "./YourIncome";
 export {
   ContractData,
   HeroSection,
-  Copyright,
+  Footer,
   Deposit,
   Levels,
   Navbars,
