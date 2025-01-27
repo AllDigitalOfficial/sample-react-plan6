@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ContractDataProvider } from "./components/context/ContractDataContext";
 import {
   ContractData,
   HeroSection,
@@ -57,6 +58,7 @@ const App: React.FC = () => {
 
 
   return (
+    <ContractDataProvider>
     <div className="App" style={{ backgroundColor: bgColor }}>
       <Navbars />
       <div className="container">
@@ -114,6 +116,7 @@ const App: React.FC = () => {
         </Button>
       )}
     </div>
+    </ContractDataProvider>
   );
 };
 

@@ -1,7 +1,10 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import bgimage from "../../assets/slider.jpg";
+import { useContractData } from "../context/ContractDataContext";
 
 const HeroSection = () => {
+  // Fetch contract data
+  const { data } = useContractData();
   // Environment variable values
   const heroTextColor = import.meta.env.VITE_APP_HERO_TEXT_COLOR || "#000000";
   const textHeadingColor = import.meta.env.VITE_APP_TEXT_HEADING_COLOR || "#000000";
@@ -88,7 +91,7 @@ const HeroSection = () => {
                 className="fs-5 fw-bold"
                 style={{ color: textHeadingColor }}
               >
-                0.000
+                {data?.contractBalance || "0.000"}
               </p>
             </div>
             <div>
@@ -98,7 +101,7 @@ const HeroSection = () => {
                 className="fs-5 fw-bold"
                 style={{ color: withdrawnColor }}
               >
-                0.000
+                {data?.withdrawnData || "0.000"}
               </p>
             </div>
           </div>
