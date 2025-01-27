@@ -1,6 +1,10 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useContractData } from "../context/ContractDataContext";
 
 const Referral = () => {
+  // Fetch contract data
+  const { data, loading } = useContractData();
+
   // Get environment variable values
   const bgColor = import.meta.env.VITE_APP_REFERRAL_BG_COLOR || "#f8f9fa"; // Default background color
   const textColor = import.meta.env.VITE_APP_REFERRAL_TEXT_COLOR || "#000000"; // Default text color
@@ -9,6 +13,12 @@ const Referral = () => {
   const cardTextColor = import.meta.env.VITE_APP_REFERRAL_CARD_TEXT_COLOR || "#000000"; // Default card text color
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff"; // Default button color
   const buttonHoverColor = import.meta.env.VITE_APP_BUTTON_HOVER_COLOR || "#0056b3"; // Default button hover color
+
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div className="roadmap-area py-5" style={{ backgroundColor: bgColor }}>
@@ -19,37 +29,42 @@ const Referral = () => {
           </h2>
 
           {/* Referral Link Section */}
-          <div className="d-flex align-items-center justify-content-center mb-4">
+            <div className="d-flex align-items-center justify-content-center mb-4">
             <span
               id="referralLink"
               className="fs-5 "
               style={{ color: lightwhiteColor }}
             >
-              You will get your ref link after investing...
+             { data?.referralLink || "You will get your ref link after investing" }
             </span>
             <Button
               id="copyButton"
               variant="outline-primary"
               className="ms-3"
               style={{
-                borderColor: buttonColor,
-                color: buttonColor,
-                transition: "all 0.3s ease",
+              borderColor: buttonColor,
+              color: buttonColor,
+              transition: "all 0.3s ease",
               }}
               onMouseOver={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor =
-                  buttonHoverColor;
-                (e.target as HTMLButtonElement).style.color = "#fff";
+              (e.target as HTMLButtonElement).style.backgroundColor =
+                buttonHoverColor;
+              (e.target as HTMLButtonElement).style.color = "#fff";
               }}
               onMouseOut={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor =
-                  "transparent";
-                (e.target as HTMLButtonElement).style.color = buttonColor;
+              (e.target as HTMLButtonElement).style.backgroundColor =
+                "transparent";
+              (e.target as HTMLButtonElement).style.color = buttonColor;
+              }}
+              onClick={() => {
+              const referralLink = data?.referralLink || "";
+              navigator.clipboard.writeText(referralLink);
+              alert("Referral link copied to clipboard!");
               }}
             >
               Copy
             </Button>
-          </div>
+            </div>
 
           {/* Referral Stats Section */}
           <Row>
@@ -61,7 +76,7 @@ const Referral = () => {
                 <Card.Body>
                   <h3>Total Reward</h3>
                   <p id="usertotalreferralbonus" className="fs-4 fw-bold">
-                    0.000 BNB
+                   {data?.userTotalReward || 0.00} BNB
                   </p>
                 </Card.Body>
               </Card>
@@ -75,7 +90,7 @@ const Referral = () => {
                 <Card.Body>
                   <h3>Total Referral</h3>
                   <p id="countdownline" className="fs-4 fw-bold">
-                    0
+                    {data?.userTotalReferral || 0}
                   </p>
                 </Card.Body>
               </Card>

@@ -8,6 +8,18 @@ type ContractDataType = {
   withdrawnData: string;
   refRewards: string;
   percentRate: string;
+  userAvailable: string;
+  userReferralBouns: string;
+  userDividends: string;
+  userTotalDeposit: string;
+  userProfit: string;
+  userTotalWithdrawn: string;
+  userPercentRate: string;
+  userTotalReward: string;
+  userTotalReferral: string;
+  userDownlineCountArray: number[];
+  referralLink: string;
+
 };
 
 type ContractDataContextType = {
@@ -25,6 +37,17 @@ export const ContractDataProvider: React.FC<{ children: React.ReactNode }> = ({ 
     withdrawnData: "0",
     refRewards: "0",
     percentRate: "0",
+    userAvailable: "0",
+    userReferralBouns: "0",
+    userDividends: "0",
+    userTotalDeposit: "0",
+    userProfit: "0",
+    userTotalWithdrawn: "0",
+    userPercentRate: "0",
+    userTotalReward: "0",
+    userTotalReferral: "0",
+    userDownlineCountArray: [],
+    referralLink: "",
   });
   const [loading, setLoading] = useState(true);
 

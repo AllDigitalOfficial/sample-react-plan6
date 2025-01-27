@@ -1,6 +1,8 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useContractData } from "../context/ContractDataContext";
 
 const Levels = () => {
+  const { data, loading } = useContractData();
   // Get environment variable values
   const sectionBgColor =
     import.meta.env.VITE_APP_LEVELS_SECTION_BG_COLOR || "#f8f9fa";
@@ -11,6 +13,12 @@ const Levels = () => {
   const percentageColor =
     import.meta.env.VITE_APP_LEVEL_PERCENTAGE_COLOR || "#007bff";
   const totalLevels = import.meta.env.VITE_APP_TOTAL_LEVEL_LENGTH || 15;
+  const levels = data?.userDownlineCountArray || [];
+   
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <section
@@ -42,7 +50,7 @@ const Levels = () => {
                       <em style={{ color: percentageColor }}>{percentage}%</em>
                     </div>
                     <h3 id={`level-${level}`} className="text-center">
-                      0
+                      {levels[level - 1] || 0}
                     </h3>
                   </Card.Body>
                 </Card>

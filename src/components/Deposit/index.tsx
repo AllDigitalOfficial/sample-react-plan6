@@ -112,7 +112,6 @@ const CardGroup = ({
   depositCardTextColor,
   textRestrictColor,
   perDayIncome,
-  percentRate,
   totalIncome,
   data,
 }: {

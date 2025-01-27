@@ -1,6 +1,10 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useContractData } from "../context/ContractDataContext";
+
 
 const ReferralLinkData = () => {
+  // Fetch contract data
+  const { data, loading } = useContractData();
   // Get environment variable values
   const bgColor = import.meta.env.VITE_APP_REFERRAL_LINK_BG_COLOR || "#f8f9fa"; // Default background color
   const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000"; // Default text color
@@ -14,7 +18,6 @@ const ReferralLinkData = () => {
   const interestRateColor =
     import.meta.env.VITE_APP_INTEREST_RATE_COLOR || "#17a2b8"; // Default color for Interest Rate card
   const rateColor = import.meta.env.VITE_APP_RATE_COLOR || "#007bff"; // Default color for rate text
-
   // Centralized styles
   const cardStyle = {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
@@ -26,6 +29,10 @@ const ReferralLinkData = () => {
     color: "#fff",
     width: "100%",
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
       <Container>
@@ -42,7 +49,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
+                 {data?.userAvailable || 0.000} <span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
                 <Button id="withdraw-button" style={buttonStyle}>
                   Withdrawal
@@ -58,7 +65,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
+                  {data?.userReferralBouns || 0.0}<span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
               </div>
 
@@ -71,7 +78,7 @@ const ReferralLinkData = () => {
                   className="fs-4 fw-bold"
                   style={{ color: rateColor }}
                 >
-                  0.000 <span style={{color:lightwhiteColor}} >BNB</span>
+                {data?.userDividends || 0.0} <span style={{color:lightwhiteColor}} >BNB</span>
                 </p>
               </div>
             </Card>
@@ -90,7 +97,7 @@ const ReferralLinkData = () => {
                 className="fs-4 fw-bold"
                 style={{ color: totalDepositColor }}
               >
-                0.000
+                {data?.userTotalDeposit || 0.0}
               </p>
             </Card>
           </Col>
@@ -105,7 +112,7 @@ const ReferralLinkData = () => {
                 className="fs-4 fw-bold"
                 style={{ color: returnsColor }}
               >
-                0.000
+                {data?.userProfit || 0.0} 
               </p>
             </Card>
           </Col>
@@ -120,7 +127,7 @@ const ReferralLinkData = () => {
                 className="fs-4 fw-bold"
                 style={{ color: totalWithdrawnColor }}
               >
-                0.000
+                {data?.userTotalWithdrawn || 0.0}
               </p>
             </Card>
           </Col>
@@ -135,7 +142,7 @@ const ReferralLinkData = () => {
                 className="fs-4 fw-bold"
                 style={{ color: interestRateColor }}
               >
-                0.000
+                {(parseInt(data?.userPercentRate) / 10).toFixed(2) || "0.00"}% Per Day
               </p>
             </Card>
           </Col>
