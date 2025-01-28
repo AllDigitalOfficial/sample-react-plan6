@@ -15,7 +15,7 @@ const Navbars = () => {
       <Navbar
 
         expand="lg"
-        className="py-3 sticky-top"
+        className="py-3 sticky-top container-fluid"
         style={{
           backgroundColor: navbarBgColor,
         }}
@@ -64,12 +64,12 @@ const Navbars = () => {
         </Container>
       </Navbar>
 
-      {/* Internal CSS for Button Responsiveness */}
+
       <style>{`
         /* For extra large screens */
         @media (min-width: 1200px) {
           .btn-responsive {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             padding: 10px 20px;
           }
         }

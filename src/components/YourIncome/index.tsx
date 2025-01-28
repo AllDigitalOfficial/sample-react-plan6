@@ -46,16 +46,17 @@ const ReferralLinkData = () => {
               <h2 className="title mb-3" style={{ color: textColor }}>
                 Your Income
               </h2>
-              <p
+                <p
                 id="depositUser"
                 className="fs-4 fw-bold"
                 style={{ color: lightwhiteColor }}
-              >
+                >
                 {data?.userAvailable || 0.0} <span>BNB</span>
-              </p>
-              <Button id="withdraw-button" style={buttonStyle}>
+                </p>
+                <Button id="withdraw-button" style={{ ...buttonStyle, width: "50%" }}>
                 Withdrawal
-              </Button>
+                </Button>
+                
             </div>
 
             <div className="mb-4 text-center">
@@ -91,7 +92,7 @@ const ReferralLinkData = () => {
         {/* Dynamic Card Rendering */}
         {cards.map((card) => (
           <Col key={card.id} md={6} lg={3}>
-            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: card.color }}>
+            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: bgColor }}>
               <h4 className="title" style={{ color: card.color }}>
                 {card.title}
               </h4>

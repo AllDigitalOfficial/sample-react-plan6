@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
-import bgimage from "../../assets/slider.jpg";
+
 import { useContractData } from "../context/ContractDataContext";
+
 
 const HeroSection = () => {
   // Fetch contract data
@@ -38,7 +39,7 @@ const HeroSection = () => {
   };
 
   return (
-    <Container style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '70vh' }}>
+    <Container style={{  backgroundSize: 'cover', backgroundPosition: 'center', height: '70vh' }}>
       <Row className="g-4" >
       {/* Left Section: Profit Info */}
       <Col lg={6} md={6} className="d-flex align-items-stretch">

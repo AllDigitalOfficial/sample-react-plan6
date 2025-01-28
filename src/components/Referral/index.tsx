@@ -40,7 +40,7 @@ const Referral = () => {
             <span
               id="referralLink"
               className="fs-5 text-wrap"
-              style={{ color: lightwhiteColor, wordBreak: "break-word" }}
+              style={{ color: textColor, wordBreak: "break-word" }}
             >
               {data?.referralLink || "You will get your ref link after investing"}
             </span>

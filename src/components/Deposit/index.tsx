@@ -65,10 +65,8 @@ const Deposit = () => {
         <Row>
           {/* Deposit Form Section */}
           <Col lg={6} md={12} className="mb-4 mb-lg-0">
-            <h2 style={{ color: depositTextColor }} className="mb-4">
-              Deposit
-            </h2>
-            <h4 style={{ color: depositTextColor }}>Make New</h4>
+      
+            <h3 style={{ color: depositTextColor }}>Make New  Deposit</h3>
             <Form>
               <Form.Group className="mb-3">
               <div className="input-group">
