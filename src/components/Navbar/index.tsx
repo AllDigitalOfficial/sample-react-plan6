@@ -15,12 +15,12 @@ const Navbars = () => {
       <Navbar
 
         expand="lg"
-        className="py-3 sticky-top container-fluid"
+        className="py-3 sticky-top container"
         style={{
           backgroundColor: navbarBgColor,
         }}
       >
-        <Container fluid>
+        <Container >
           {/* Left: Logo */}
           <Navbar.Brand href="#home" className="d-flex align-items-center">
             <img

@@ -14,6 +14,7 @@ const ReferralLinkData = () => {
   const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000";
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
   const lightwhiteColor = import.meta.env.VITE_APP_LIGHT_WHITE_COLOR || "#f8f9fa";
+  const buttonWithdrawableWidth = import.meta.env.VITE_APP_WITHDRAWN_BUTTON_WIDTH || "50%";
 
   const cardStyle = {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
@@ -53,7 +54,7 @@ const ReferralLinkData = () => {
                 >
                 {data?.userAvailable || 0.0} <span>BNB</span>
                 </p>
-                <Button id="withdraw-button" style={{ ...buttonStyle, width: "50%" }}>
+                <Button id="withdraw-button" style={{ ...buttonStyle, width: buttonWithdrawableWidth }}>
                 Withdrawal
                 </Button>
                 

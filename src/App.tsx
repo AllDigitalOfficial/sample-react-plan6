@@ -106,7 +106,7 @@ const App: React.FC = () => {
               bottom: "20px",
               backgroundColor: floatButtonColor,
               right: "20px",
-              borderRadius: "50%",
+              borderRadius: "20%",
               padding: "10px 15px",
               fontSize: "18px",
               boxShadow: floatHoverButtonColor,
