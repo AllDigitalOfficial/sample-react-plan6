@@ -39,7 +39,7 @@ const HeroSection = () => {
   };
 
   return (
-    <Container style={{  backgroundSize: 'cover', backgroundPosition: 'center', height: '70vh' }}>
+    <Container style={{  backgroundSize: 'cover' }}>
       <Row className="g-4" >
       {/* Left Section: Profit Info */}
       <Col lg={6} md={6} className="d-flex align-items-stretch">

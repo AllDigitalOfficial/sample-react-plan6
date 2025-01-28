@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import './style.css';
 import { ContractDataProvider } from "./components/context/ContractDataContext";
 import {
   ContractData,
@@ -56,68 +57,71 @@ const App: React.FC = () => {
   const floatButtonColor = import.meta.env.VITE_APP_FLOATING_ICON_BACK_TO_TOP_COLOR || "#007bff";
   const floatHoverButtonColor = import.meta.env.VITE_APP_FLOATING_ICON_BACK_TO_TOP_HOVER_COLOR || "#007bff";
 
-
   return (
     <ContractDataProvider>
-    <div className="App" style={{ backgroundColor: bgColor }}>
-      <Navbars />
-      <div className="container">
-        <div
-          className="col-lg-12 col-md-12 mt-4 mb-9"
+      <div className="App" style={{ backgroundColor: bgColor }}>
+        {/* Navbar */}
+        <Navbars />
         
-        >
-          <HeroSection />
-        </div>
+        <div className="container">
+          {/* Hero Section */}
+          <div className="col-12 mb-4 mt-6">
+            <HeroSection />
+          </div>
 
-        <div className="col-lg-12 col-md-12 mb-4">
-          <ContractData />
-        </div>
+          {/* Contract Data */}
+          <div className="col-12 mb-4">
+            <ContractData />
+          </div>
 
-        <div className="col-lg-12 col-md-12 mb-4">
-          <Deposit />
-        </div>
-        <div className="row">
-          <div className="col-lg-12 col-md-12 mb-4">
-            <ReferralLinkData />
+          {/* Deposit Section */}
+          <div className="col-12 mb-4">
+            <Deposit />
+          </div>
+
+          {/* Referral Link Data */}
+          <div className="row">
+            <div className="col-12 mb-4">
+              <ReferralLinkData />
+            </div>
+          </div>
+
+          {/* Referral Section */}
+          <div className="col-12 mb-4">
+            <Referral />
+          </div>
+
+          {/* Levels Section */}
+          <div className="col-12">
+            <Levels />
           </div>
         </div>
-        <div className="col-lg-12 col-md-12 mb-4">
-          <Referral />
-        </div>
 
-        <div className="col-lg-12 col-md-12 ">
-          <Levels />
+        {/* Back to Top Button */}
+        {showButton && (
+          <Button
+            onClick={scrollToTop}
+            className="back-to-top position-fixed"
+            style={{
+              bottom: "20px",
+              backgroundColor: floatButtonColor,
+              right: "20px",
+              borderRadius: "50%",
+              padding: "10px 15px",
+              fontSize: "18px",
+              boxShadow: floatHoverButtonColor,
+              zIndex: 1000,
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowUp} />
+          </Button>
+        )}
+
+        {/* Footer Section */}
+        <div className="col-12">
+          <Footer />
         </div>
       </div>
-
-   
-
-      {/* Back to top button */}
-      {showButton && (
-        <Button
-          onClick={scrollToTop}
-      
-          className="back-to-top"
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            backgroundColor:floatButtonColor,
-            right: "20px",
-            borderRadius: "50%",
-            padding: "10px 15px",
-            fontSize: "18px",
-            boxShadow: floatHoverButtonColor,
-            zIndex: 1000,
-          }}
-        >
-          <FontAwesomeIcon icon={faArrowUp} />
-        </Button>
-      )}
-        <div className="col-lg-12 col-md-12">
-        <Footer />
-      </div>
-    </div>
-  
     </ContractDataProvider>
   );
 };

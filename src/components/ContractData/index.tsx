@@ -19,12 +19,14 @@ const ContractData: React.FC = () => {
 
   if (loading) {
     return (
+      
       <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
         <Spinner animation="grow" />
       </div>
     );
   }
   return (
+    <div className="col-12 mb-4">
     <Container>
       <Row className="mb-4">
         <Col>
@@ -70,6 +72,7 @@ const ContractData: React.FC = () => {
         ))}
       </Row>
     </Container>
+    </div>
   );
 };
 
