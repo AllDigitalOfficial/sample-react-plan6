@@ -1,5 +1,6 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Levels = () => {
   const { data, loading } = useContractData();
@@ -14,9 +15,14 @@ const Levels = () => {
     import.meta.env.VITE_APP_LEVEL_PERCENTAGE_COLOR || "#007bff";
   const totalLevels = import.meta.env.VITE_APP_TOTAL_LEVEL_LENGTH || 15;
   const levels = data?.userDownlineCountArray || [];
-   
+  
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <Spinner animation="grow" />
+      </div>
+    );
   }
 
 

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
+import Spinner from 'react-bootstrap/Spinner';
 
 const Deposit = () => {
   const { data, loading } = useContractData();
 
-  // Environment variable values
+
   const depositBgColor = import.meta.env.VITE_APP_DEPOSIT_BG_COLOR || "#f8f9fa";
   const depositTextColor = import.meta.env.VITE_APP_DEPOSIT_TEXT_COLOR || "#000000";
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
@@ -49,8 +50,13 @@ const Deposit = () => {
     backgroundColor: depositCardBgColor,
   };
 
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <Spinner animation="grow" />
+      </div>
+    );
   }
 
   return (
@@ -65,19 +71,21 @@ const Deposit = () => {
             <h4 style={{ color: depositTextColor }}>Make New</h4>
             <Form>
               <Form.Group className="mb-3">
-                <div className="input-group">
-                  <Form.Control
-                  id="depositAmount"
-                  type="number"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  placeholder={`${minDeposit} BNB`}
-                  style={{ height: "50px" }}
-                  />
-                  <span className="input-group-text" style={{ height: "50px" }}>
-                  BNB
-                  </span>
-                </div>
+              <div className="input-group">
+                <Form.Control
+                id="depositAmount"
+                type="number"
+                value={amount}
+                onChange={handleAmountChange}
+                placeholder={`${minDeposit} BNB`}
+                style={{ height: "50px" }}
+                min={minDeposit}
+                max={maxDeposit}
+                />
+                <span className="input-group-text" style={{ height: "50px" }}>
+                BNB
+                </span>
+              </div>
               </Form.Group>
               <Button id="sendTransaction" style={buttonStyle} className="mb-3">
                 MAKE DEPOSIT

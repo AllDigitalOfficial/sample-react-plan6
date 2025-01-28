@@ -1,24 +1,20 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
-
+import Spinner from 'react-bootstrap/Spinner';
+import { getCardDataYourIncome } from "../../utils/utils_Component";
 
 const ReferralLinkData = () => {
   // Fetch contract data
   const { data, loading } = useContractData();
-  // Get environment variable values
-  const bgColor = import.meta.env.VITE_APP_REFERRAL_LINK_BG_COLOR || "#f8f9fa"; // Default background color
-  const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000"; // Default text color
-  const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff"; // Default button color
-  const lightwhiteColor = import.meta.env.VITE_APP_LIGHT_WHITE_COLOR || "#f8f9fa"; // Default color for light white
-  const totalDepositColor =
-    import.meta.env.VITE_APP_TOTAL_DEPOSIT_COLOR || "#28a745"; // Default color for Total Deposit card
-  const totalWithdrawnColor =
-    import.meta.env.VITE_APP_TOTAL_WITHDRAWN_COLOR || "#dc3545"; // Default color for Total Withdrawn card
-  const returnsColor = import.meta.env.VITE_APP_RETURNS_COLOR || "#ffc107"; // Default color for Returns card
-  const interestRateColor =
-    import.meta.env.VITE_APP_INTEREST_RATE_COLOR || "#17a2b8"; // Default color for Interest Rate card
-  const rateColor = import.meta.env.VITE_APP_RATE_COLOR || "#007bff"; // Default color for rate text
-  // Centralized styles
+  
+  // Get dynamic card data
+  const cards = getCardDataYourIncome(data);
+  
+    const bgColor = import.meta.env.VITE_APP_REFERRAL_LINK_BG_COLOR || "#f8f9fa";
+  const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000";
+  const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
+  const lightwhiteColor = import.meta.env.VITE_APP_LIGHT_WHITE_COLOR || "#f8f9fa";
+
   const cardStyle = {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
     backgroundColor: bgColor,
@@ -31,124 +27,82 @@ const ReferralLinkData = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <Spinner animation="grow" />
+      </div>
+    );
   }
 
+ 
+
   return (
-      <Container>
-        <Row className="mb-4 justify-content-center">
-          {/* Left Section: Income and Referral Info */}
-          <Col lg={12} >
-            <Card className="shadow-sm p-4" style={cardStyle}>
-              <div className="mb-4 text-center">
-                <h2 className="title mb-3" style={{ color: textColor }}>
-                  Your Income
-                </h2>
-                <p
-                  id="depositUser"
-                  className="fs-4 fw-bold"
-                  style={{ color: rateColor }}
-                >
-                 {data?.userAvailable || 0.000} <span style={{color:lightwhiteColor}} >BNB</span>
-                </p>
-                <Button id="withdraw-button" style={buttonStyle}>
-                  Withdrawal
-                </Button>
-              </div>
-
-              <div className="mb-4 text-center">
-                <h3 className="title mb-3" style={{ color: textColor }}>
-                  Referral Amount Available
-                </h3>
-                <p
-                  id="userAvailabereferralbonus"
-                  className="fs-4 fw-bold"
-                  style={{ color: rateColor }}
-                >
-                  {data?.userReferralBouns || 0.0}<span style={{color:lightwhiteColor}} >BNB</span>
-                </p>
-              </div>
-
-              <div className="mb-4 text-center">
-                <h3 className="title mb-3 " style={{ color: textColor }}>
-                  User Dividends Available
-                </h3>
-                <p
-                  id="userDivident"
-                  className="fs-4 fw-bold"
-                  style={{ color: rateColor }}
-                >
-                {data?.userDividends || 0.0} <span style={{color:lightwhiteColor}} >BNB</span>
-                </p>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row className="g-4">
-          {/* Four State Cards */}
-          <Col md={6} lg={3}>
-            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: totalDepositColor }}>
-              <h4 className="title" style={{ color: totalDepositColor }}>
-                Total Deposit
-              </h4>
+    <Container>
+      <Row className="mb-4 justify-content-center">
+        {/* Left Section: Income and Referral Info */}
+        <Col lg={12}>
+          <Card className="shadow-sm p-4" style={cardStyle}>
+            <div className="mb-4 text-center">
+              <h2 className="title mb-3" style={{ color: textColor }}>
+                Your Income
+              </h2>
               <p
-                id="userDeposits"
+                id="depositUser"
                 className="fs-4 fw-bold"
-                style={{ color: totalDepositColor }}
+                style={{ color: lightwhiteColor }}
               >
-                {data?.userTotalDeposit || 0.0}
+                {data?.userAvailable || 0.0} <span>BNB</span>
+              </p>
+              <Button id="withdraw-button" style={buttonStyle}>
+                Withdrawal
+              </Button>
+            </div>
+
+            <div className="mb-4 text-center">
+              <h3 className="title mb-3" style={{ color: textColor }}>
+                Referral Amount Available
+              </h3>
+              <p
+                id="userAvailabereferralbonus"
+                className="fs-4 fw-bold"
+                style={{ color: lightwhiteColor }}
+              >
+                {data?.userReferralBouns || 0.0} <span>BNB</span>
+              </p>
+            </div>
+
+            <div className="mb-4 text-center">
+              <h3 className="title mb-3" style={{ color: textColor }}>
+                User Dividends Available
+              </h3>
+              <p
+                id="userDivident"
+                className="fs-4 fw-bold"
+                style={{ color: lightwhiteColor }}
+              >
+                {data?.userDividends || 0.0} <span>BNB</span>
+              </p>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className="g-4">
+        {/* Dynamic Card Rendering */}
+        {cards.map((card) => (
+          <Col key={card.id} md={6} lg={3}>
+            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: card.color }}>
+              <h4 className="title" style={{ color: card.color }}>
+                {card.title}
+              </h4>
+              <p id={card.id} className="fs-4 fw-bold" style={{ color: card.color }}>
+                {card.value}
               </p>
             </Card>
           </Col>
-
-          <Col md={6} lg={3}>
-            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: returnsColor }}>
-              <h4 className="title" style={{ color: returnsColor }}>
-                Your Returns
-              </h4>
-              <p
-                id="profit"
-                className="fs-4 fw-bold"
-                style={{ color: returnsColor }}
-              >
-                {data?.userProfit || 0.0} 
-              </p>
-            </Card>
-          </Col>
-
-          <Col md={6} lg={3}>
-            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: totalWithdrawnColor }}>
-              <h4 className="title" style={{ color: totalWithdrawnColor }}>
-                Total Withdrawn
-              </h4>
-              <p
-                id="totalUserTotalWithdrawn"
-                className="fs-4 fw-bold"
-                style={{ color: totalWithdrawnColor }}
-              >
-                {data?.userTotalWithdrawn || 0.0}
-              </p>
-            </Card>
-          </Col>
-
-          <Col md={6} lg={3}>
-            <Card className="shadow-sm p-3 text-center" style={{ ...cardStyle, borderColor: interestRateColor }}>
-              <h4 className="title" style={{ color: interestRateColor }}>
-                Interest Rate
-              </h4>
-              <p
-                id="interestRate"
-                className="fs-4 fw-bold"
-                style={{ color: interestRateColor }}
-              >
-                {(parseInt(data?.userPercentRate) / 10).toFixed(2) || "0.00"}% Per Day
-              </p>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-
+        ))}
+      </Row>
+    </Container>
   );
 };
 

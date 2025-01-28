@@ -1,11 +1,13 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 const Referral = () => {
   // Fetch contract data
   const { data, loading } = useContractData();
 
-  // Get environment variable values
+
   const bgColor = import.meta.env.VITE_APP_REFERRAL_BG_COLOR || "#f8f9fa"; // Default background color
   const textColor = import.meta.env.VITE_APP_REFERRAL_TEXT_COLOR || "#000000"; // Default text color
   const cardBgColor = import.meta.env.VITE_APP_REFERRAL_CARD_BG_COLOR || "#ffffff"; // Default card background color
@@ -15,8 +17,13 @@ const Referral = () => {
   const buttonHoverColor = import.meta.env.VITE_APP_BUTTON_HOVER_COLOR || "#0056b3"; // Default button hover color
 
   
+
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+        <Spinner animation="grow" />
+      </div>
+    );
   }
 
 
