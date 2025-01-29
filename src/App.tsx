@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css';
 import { ContractDataProvider } from "./components/context/ContractDataContext";
-import SmartContractInteraction from "./providers/SmartContractInteraction";
+
 import { Web3ModalProvider } from "./providers/Web3ModalProvider";
 import {
   ContractData,
@@ -65,8 +65,7 @@ const App: React.FC = () => {
       <div className="App" style={{ backgroundColor: bgColor }}>
         {/* Navbar */}
         <Navbars />
-       
-        <SmartContractInteraction />
+   
         <div className="container">
           {/* Hero Section */}
           <div className="col-12 mb-4 mt-6">

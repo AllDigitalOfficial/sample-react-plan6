@@ -14,14 +14,14 @@ interface Web3ModalProviderProps {
 const queryClient = new QueryClient();
 
 // 1. Get projectId from https://cloud.walletconnect.com
-const projectId = '9f5afcba328b2c1a96014fbd8d71f6ec';
+const projectId = import.meta.env.VITE_APP_PROJECT_ID;
 
 // 2. Configure metadata
 const metadata = {
-  name: 'Web3Modal',
-  description: 'Web3Modal Example',
-  url: 'https://web3modal.com', // Must match your domain
-  icons: ['https://avatars.githubusercontent.com/u/37784886'],
+  name: import.meta.env.VITE_APP_PROJECT_NAME,
+  description: import.meta.env.VITE_APP_PROJECT_DESCRIPTION,
+  url: import.meta.env.VITE_APP_PROJECT_URL, // Must match your domain
+  icons: [import.meta.env.VITE_APP_PROJECT_ICON],
 };
 
 // 3. Configure chains

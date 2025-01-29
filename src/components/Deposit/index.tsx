@@ -108,13 +108,13 @@ const Deposit = () => {
     backgroundColor: depositCardBgColor,
   };
 
-  if (loading) {
-    return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <Spinner animation="grow" />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+  //       <Spinner animation="grow" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div id="deposit" className="py-5" style={{ backgroundColor: depositBgColor }}>
@@ -153,7 +153,7 @@ const Deposit = () => {
 
               {investError && (
                 <div className="alert alert-danger">
-                  {investError.message}
+                  Investment Failed 
                 </div>
               )}
   

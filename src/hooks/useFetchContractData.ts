@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { fetchContractData } from "../utils/infuraApi";
+import { useAccount } from "wagmi";
 
 export const useFetchContractData = () => {
+  const { address } = useAccount();
   const [data, setData] = useState({
     contractBalance: "0",
     totalDeposits: "0",
@@ -15,7 +17,8 @@ export const useFetchContractData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetchContractData();
+        const result = await fetchContractData(address || "");
+       
         setData(result);
       } catch (err: any) {
         setError(err.message || "An error occurred");

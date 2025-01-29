@@ -17,14 +17,14 @@ const ContractData: React.FC = () => {
   const cardBorderColor = import.meta.env.VITE_APP_CARD_BORDER_COLOR || "#dee2e6"; // Default to light border color
 
 
-  if (loading) {
-    return (
+  // if (loading) {
+  //   return (
       
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-        <Spinner animation="grow" />
-      </div>
-    );
-  }
+  //     <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+  //       <Spinner animation="grow" />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="col-12 mb-4">
     <Container>

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { fetchContractData } from "../../utils/infuraApi";
+import { useAccount } from "wagmi";
 
 type ContractDataType = {
   contractBalance: string;
@@ -30,6 +31,7 @@ type ContractDataContextType = {
 const ContractDataContext = createContext<ContractDataContextType | undefined>(undefined);
 
 export const ContractDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { address } = useAccount();
   const [data, setData] = useState<ContractDataType>({
     contractBalance: "0",
     totalDeposits: "0",
@@ -53,7 +55,7 @@ export const ContractDataProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   useEffect(() => {
     const getData = async () => {
-      const fetchedData = await fetchContractData();
+      const fetchedData = await fetchContractData( address || "");
       setData(fetchedData);
       setLoading(false);
     };
