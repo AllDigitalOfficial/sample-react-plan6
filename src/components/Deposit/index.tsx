@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { parseEther } from 'viem';
 import Spinner from 'react-bootstrap/Spinner';
+import abi from "../../utils/abi.json";
 
 const Deposit = () => {
   const { data, loading } = useContractData();
+  const { address, isConnected } = useAccount();
+  const [isDepositComplete, setIsDepositComplete] = useState<boolean>(false);
 
-
+  // Environment variables
   const depositBgColor = import.meta.env.VITE_APP_DEPOSIT_BG_COLOR || "#f8f9fa";
   const depositTextColor = import.meta.env.VITE_APP_DEPOSIT_TEXT_COLOR || "#000000";
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
@@ -16,28 +21,82 @@ const Deposit = () => {
   const depositCardTextColor = import.meta.env.VITE_APP_DEPOSIT_CARD_TEXT_COLOR || "#000000";
   const minDeposit = import.meta.env.VITE_APP_MIN_DEPOSIT || 0.05;
   const maxDeposit = import.meta.env.VITE_APP_MAX_DEPOSIT || 1000;
-  const perDayIncome = import.meta.env.VITE_APP_DEPOSIT_INCOME || 0.0;
-  const percentRate = import.meta.env.VITE_APP_PERCENT_RATE || 0;
-  const totalIncome = import.meta.env.VITE_APP_TOTAL_INCOME || 0.0;
   const basicInterestRate = import.meta.env.VITE_APP_BASIC_INTEREST_RATE || 1.5;
+  const contractAddress = import.meta.env.VITE_APP_INFURA_CONTRACT_ADDRESS;
+
+  const [amount, setAmount] = useState<string>("");
   const dailyRoi = basicInterestRate / 100;
 
-  const [amount, setAmount] = useState<number>();
-  const [perDayIncomeDisplay, setPerDayIncomeDisplay] = useState<string>(`${perDayIncome} BNB`);
-  const [totalIncomeDisplay, setTotalIncomeDisplay] = useState<string>(`${totalIncome} BNB`);
+  // Contract interaction hooks
+  const {
+    writeContract,
+    data: hash,
+    isPending,
+    error: investError
+  } = useWriteContract();
 
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newAmount = parseFloat(event.target.value);
-    setAmount(newAmount);
+  const {
+    isLoading: isWaitingForTransaction,
+    isSuccess: isTransactionSuccess
+  } = useWaitForTransactionReceipt({
+    hash
+  });
 
-    if (!isNaN(newAmount)) {
-      const newPerDayIncome = newAmount * dailyRoi;
-      const newTotalIncome = newAmount * 2; // Assuming total income is double the investment
+  // Get referrer from URL if present
+  const getReferrer = () => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    return (ref && ref.length === 42 && ref.startsWith('0x')) ? ref : import.meta.env.VITE_APP_DEFAULT_REFERRER;
+  };
 
-      setPerDayIncomeDisplay(`${newPerDayIncome.toFixed(3)} BNB`);
-      setTotalIncomeDisplay(`${newTotalIncome.toFixed(3)} BNB`);
+  const handleInvestment = async () => {
+    try {
+      if (!isConnected || !address || !amount) return;
+
+      const amountNum = parseFloat(amount);
+      if (amountNum < minDeposit || amountNum > maxDeposit) {
+        throw new Error(`Investment must be between ${minDeposit} and ${maxDeposit} BNB`);
+      }
+
+      await writeContract({
+        address: contractAddress,
+        abi: abi,
+        functionName: 'invest',
+        args: [getReferrer() as `0x98B137209686a67f030E123e1E1d828eDA78087A`],
+        value: parseEther(amount)
+      });
+      setIsDepositComplete(true);
+    } catch (error) {
+      console.error('Investment error:', error);
     }
   };
+  // Show an alert when the transaction is successful
+  useEffect(() => {
+    if (hash) {
+    
+      alert("Investment Complete!");
+
+    }
+  }, [hash]);
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setAmount(value);
+  };
+
+  const calculateReturns = (amount: string) => {
+    const numAmount = parseFloat(amount);
+    if (isNaN(numAmount)) return { perDay: "0.000 BNB", total: "0.000 BNB" };
+
+    const perDayIncome = numAmount * dailyRoi;
+    const totalIncome = numAmount * 2; // Assuming 200% total return
+
+    return {
+      perDay: `${perDayIncome.toFixed(3)} BNB`,
+      total: `${totalIncome.toFixed(3)} BNB`
+    };
+  };
+
+  const returns = calculateReturns(amount);
 
   const buttonStyle = {
     backgroundColor: buttonColor,
@@ -49,7 +108,6 @@ const Deposit = () => {
     boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
     backgroundColor: depositCardBgColor,
   };
-
 
   if (loading) {
     return (
@@ -63,31 +121,56 @@ const Deposit = () => {
     <div id="deposit" className="py-5" style={{ backgroundColor: depositBgColor }}>
       <Container>
         <Row>
-          {/* Deposit Form Section */}
           <Col lg={6} md={12} className="mb-4 mb-lg-0">
-      
-            <h3 style={{ color: depositTextColor }}>Make New  Deposit</h3>
+            <h3 style={{ color: depositTextColor }}>Make New Deposit</h3>
             <Form>
               <Form.Group className="mb-3">
-              <div className="input-group">
-                <Form.Control
-                id="depositAmount"
-                type="number"
-                value={amount}
-                onChange={handleAmountChange}
-                placeholder={`${minDeposit} BNB`}
-                style={{ height: "50px" }}
-                min={minDeposit}
-                max={maxDeposit}
-                />
-                <span className="input-group-text" style={{ height: "50px" }}>
-                BNB
-                </span>
-              </div>
+                <div className="input-group">
+                  <Form.Control
+                    id="depositAmount"
+                    type="number"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    placeholder={`${minDeposit} BNB`}
+                    style={{ height: "50px" }}
+                    min={minDeposit}
+                    max={maxDeposit}
+                  />
+                  <span className="input-group-text" style={{ height: "50px" }}>
+                    BNB
+                  </span>
+                </div>
               </Form.Group>
-              <Button id="sendTransaction" style={buttonStyle} className="mb-3">
-                MAKE DEPOSIT
+              
+              <Button
+                id="sendTransaction"
+                style={buttonStyle}
+                className="mb-3"
+                onClick={handleInvestment}
+                disabled={!isConnected || isPending || isWaitingForTransaction || !amount}
+              >
+                Make Deposit
               </Button>
+
+              {investError && (
+                <div className="alert alert-danger">
+                  {investError.message}
+                </div>
+              )}
+  
+              {isTransactionSuccess && hash && (
+                <div className="alert alert-success">
+                  Investment successful! View on{' '}
+                  <a
+                    href={`https://testnet.bscscan.com/tx/${hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    BscScan
+                  </a>
+                </div>
+              )}
+
               <div className="text-muted d-flex gap-4">
                 <p style={{ color: textRed }}>Minimum {minDeposit} BNB</p>
                 <p style={{ color: textRed }}>Maximum {maxDeposit} BNB</p>
@@ -95,15 +178,14 @@ const Deposit = () => {
             </Form>
           </Col>
 
-          {/* Summary Cards Section */}
           <Col lg={6} md={12}>
             <CardGroup
               cardStyle={cardStyle}
               depositCardTextColor={depositCardTextColor}
               textRestrictColor={textRestrictColor}
-              perDayIncome={perDayIncomeDisplay}
-              percentRate={percentRate}
-              totalIncome={totalIncomeDisplay}
+              perDayIncome={returns.perDay}
+              percentRate={parseInt(data?.percentRate || "0") / 10}
+              totalIncome={returns.total}
               data={data}
             />
           </Col>
@@ -118,6 +200,7 @@ const CardGroup = ({
   depositCardTextColor,
   textRestrictColor,
   perDayIncome,
+  percentRate,
   totalIncome,
   data,
 }: {
@@ -139,7 +222,7 @@ const CardGroup = ({
     />
     <CardSection
       title="Percent Rate"
-      value={`${parseInt(data?.percentRate || "0") / 10}%`}
+      value={`${percentRate}%`}
       cardStyle={cardStyle}
       textRestrictColor={textRestrictColor}
       depositCardTextColor={depositCardTextColor}

@@ -6,9 +6,11 @@ import Levels from "./Levels";
 import Navbars from "./Navbar";
 import Referral from "./Referral";
 import ReferralLinkData from "./YourIncome";
+import WalletConnect from "./walletconnect";
 
 export {
   ContractData,
+  WalletConnect,
   HeroSection,
   Footer,
   Deposit,

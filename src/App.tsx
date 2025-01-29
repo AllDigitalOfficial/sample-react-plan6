@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './style.css';
 import { ContractDataProvider } from "./components/context/ContractDataContext";
+import SmartContractInteraction from "./providers/SmartContractInteraction";
+import { Web3ModalProvider } from "./providers/Web3ModalProvider";
 import {
   ContractData,
+  WalletConnect,
   HeroSection,
   Footer,
   Deposit,
@@ -58,11 +61,13 @@ const App: React.FC = () => {
   const floatHoverButtonColor = import.meta.env.VITE_APP_FLOATING_ICON_BACK_TO_TOP_HOVER_COLOR || "#007bff";
 
   return (
+    <Web3ModalProvider>
     <ContractDataProvider>
       <div className="App" style={{ backgroundColor: bgColor }}>
         {/* Navbar */}
         <Navbars />
-        
+       
+        <SmartContractInteraction />
         <div className="container">
           {/* Hero Section */}
           <div className="col-12 mb-4 mt-6">
@@ -123,6 +128,7 @@ const App: React.FC = () => {
         </div>
       </div>
     </ContractDataProvider>
+    </Web3ModalProvider>
   );
 };
 

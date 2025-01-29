@@ -1,4 +1,5 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import {   WalletConnect } from "../../components/index";
 
 const Navbars = () => {
   const navbarBgColor =
@@ -59,6 +60,7 @@ const Navbars = () => {
               >
                 Connect Wallet
               </Button>
+               <WalletConnect />
             </div>
           </Nav>
         </Container>
