@@ -6,7 +6,6 @@ import SmartContractInteraction from "./providers/SmartContractInteraction";
 import { Web3ModalProvider } from "./providers/Web3ModalProvider";
 import {
   ContractData,
-  WalletConnect,
   HeroSection,
   Footer,
   Deposit,

@@ -9,7 +9,6 @@ import abi from "../../utils/abi.json";
 const Deposit = () => {
   const { data, loading } = useContractData();
   const { address, isConnected } = useAccount();
-  const [isDepositComplete, setIsDepositComplete] = useState<boolean>(false);
 
   // Environment variables
   const depositBgColor = import.meta.env.VITE_APP_DEPOSIT_BG_COLOR || "#f8f9fa";
@@ -62,10 +61,10 @@ const Deposit = () => {
         address: contractAddress,
         abi: abi,
         functionName: 'invest',
-        args: [getReferrer() as `0x98B137209686a67f030E123e1E1d828eDA78087A`],
+        args: [getReferrer() ],
         value: parseEther(amount)
       });
-      setIsDepositComplete(true);
+ 
     } catch (error) {
       console.error('Investment error:', error);
     }
@@ -202,7 +201,6 @@ const CardGroup = ({
   perDayIncome,
   percentRate,
   totalIncome,
-  data,
 }: {
   cardStyle: React.CSSProperties;
   depositCardTextColor: string;

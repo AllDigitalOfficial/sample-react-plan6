@@ -58,9 +58,9 @@ const Navbars = () => {
                   borderColor: buttonBorderColor,
                 }}
               >
-                Connect Wallet
+             <WalletConnect />
               </Button>
-               <WalletConnect />
+               
             </div>
           </Nav>
         </Container>

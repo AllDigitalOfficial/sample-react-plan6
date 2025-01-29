@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 import { INFURA_API_URL, CONTRACT_ADDRESS, ABI } from "./constants";
 
+
+
 export const fetchContractData = async () => {
   try {
     const provider = new ethers.JsonRpcProvider(INFURA_API_URL);

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { WagmiConfig, createConfig } from 'wagmi';
-import { arbitrum, mainnet } from 'wagmi/chains';
+import { Chain, arbitrum, mainnet,bscTestnet } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Types
@@ -25,7 +25,7 @@ const metadata = {
 };
 
 // 3. Configure chains
-const chains = [mainnet, arbitrum];
+const chains: readonly [Chain, ...Chain[]] = [mainnet, arbitrum,bscTestnet];
 
 // 4. Create wagmiConfig using defaultWagmiConfig
 const config = defaultWagmiConfig({
