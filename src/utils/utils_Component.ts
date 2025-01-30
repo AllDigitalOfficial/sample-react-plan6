@@ -1,34 +1,12 @@
-export const getCardDataYourIncome = (data: any) => {
-    return [
-      {
-        id: "userDeposits",
-        title: "Total Deposit",
-        value: data?.userTotalDeposit || 0.0,
-        color: import.meta.env.VITE_APP_TOTAL_DEPOSIT_COLOR || "#28a745",
-      },
-      {
-        id: "profit",
-        title: "Your Returns",
-        value: data?.userProfit || 0.0,
-        color: import.meta.env.VITE_APP_RETURNS_COLOR || "#ffc107",
-      },
-      {
-        id: "totalUserTotalWithdrawn",
-        title: "Total Withdrawn",
-        value: data?.userTotalWithdrawn || 0.0,
-        color: import.meta.env.VITE_APP_TOTAL_WITHDRAWN_COLOR || "#dc3545",
-      },
-      {
-        id: "interestRate",
-        title: "Interest Rate",
-        value: `${(parseInt(data?.userPercentRate) / 10).toFixed(2) || "0.00"}% Per Day`,
-        color: import.meta.env.VITE_APP_INTEREST_RATE_COLOR || "#17a2b8",
-      },
-    ];
-  };
-  
 
-  export const getCardDataContractData = (data: any) => [
+  interface ContractData {
+    totalDeposits: number;
+    totalUsers: number;
+    withdrawnData: number;
+    refRewards: number;
+  }
+
+  export const getCardDataContractData = (data: ContractData) => [
     {
       id: "deposited",
       title: "Deposited",
@@ -58,4 +36,43 @@ export const getCardDataYourIncome = (data: any) => {
       iconClass: "bi bi-gift fs-3 text-primary",
     },
   ];
+  
+
+
+
+interface IncomeData {
+  userTotalDeposit: number;
+  userProfit: number;
+  userTotalWithdrawn: number;
+  userPercentRate: string;
+}
+
+export const getCardDataYourIncome = (data: IncomeData) => {
+    return [
+      {
+        id: "userDeposits",
+        title: "Total Deposit",
+        value: data?.userTotalDeposit || 0.0,
+        color: import.meta.env.VITE_APP_TOTAL_DEPOSIT_COLOR || "#28a745",
+      },
+      {
+        id: "profit",
+        title: "Your Returns",
+        value: data?.userProfit || 0.0,
+        color: import.meta.env.VITE_APP_RETURNS_COLOR || "#ffc107",
+      },
+      {
+        id: "totalUserTotalWithdrawn",
+        title: "Total Withdrawn",
+        value: data?.userTotalWithdrawn || 0.0,
+        color: import.meta.env.VITE_APP_TOTAL_WITHDRAWN_COLOR || "#dc3545",
+      },
+      {
+        id: "interestRate",
+        title: "Interest Rate",
+        value: `${(parseInt(data?.userPercentRate) / 10).toFixed(2) || "0.00"}% Per Day`,
+        color: import.meta.env.VITE_APP_INTEREST_RATE_COLOR || "#17a2b8",
+      },
+    ];
+  };
   

@@ -73,18 +73,18 @@ const App: React.FC = () => {
           </div>
 
           {/* Contract Data */}
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-4 mt-6">
             <ContractData />
           </div>
 
           {/* Deposit Section */}
-          <div className="col-12 mb-4">
+          <div className="col-12 my-4 mt-6">
             <Deposit />
           </div>
 
           {/* Referral Link Data */}
           <div className="row">
-            <div className="col-12 mb-4">
+            <div className="col-12 mb-4 mt-6">
               <ReferralLinkData />
             </div>
           </div>

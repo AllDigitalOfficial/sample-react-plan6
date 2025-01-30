@@ -10,6 +10,17 @@ const Navbars = () => {
     import.meta.env.VITE_APP_BUTTON_TEXT_COLOR || "#ffffff"; // Default to white
   const buttonBorderColor =
     import.meta.env.VITE_APP_BUTTON_BORDER_COLOR || "#007bff"; // Default to blue
+    const depositLink = import.meta.env.VITE_APP_DEPOSIT_LINK || "#deposit";  
+
+    const buttonStyle = {
+      backgroundColor: buttonBgColor,
+      color: buttonTextColor,
+      fontWeight: "bold",
+      border: `1px solid ${buttonBorderColor}`,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    };
 
   return (
     <>
@@ -28,27 +39,15 @@ const Navbars = () => {
               alt="Logo"
               src={import.meta.env.VITE_APP_LOGO || ""}
               className="img-fluid"
-              style={{ maxWidth: "40%", height: "auto" }}
+              style={{ maxWidth: "15%", height: "auto" }}
             />
           </Navbar.Brand>
 
           {/* Right: Buttons */}
           <Nav className="ms-auto d-flex align-items-center flex-wrap">
             <div className="d-flex gap-2 end-0">
-              <Button
-                variant="outline-light"
-                className=" btn-responsive"
-                style={{
-                  backgroundColor: buttonBgColor,
-                  color: buttonTextColor,
-                  borderColor: buttonBorderColor,
-                }}
-                onClick={() =>
-                  window.open(import.meta.env.VITE_SMART_CONTRACT || "", "_blank")
-                }
-              >
-                Smart Contract
-              </Button>
+            <Button href={depositLink} style={buttonStyle}>Deposit</Button>
+             
               <Button
                 variant="outline-light"
                 className="btn-responsive"

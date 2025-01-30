@@ -3,15 +3,15 @@ import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
-import Spinner from 'react-bootstrap/Spinner';
+
 import abi from "../../utils/abi.json";
 
 const Deposit = () => {
-  const { data, loading } = useContractData();
+  const { data } = useContractData();
   const { address, isConnected } = useAccount();
 
   // Environment variables
-  const depositBgColor = import.meta.env.VITE_APP_DEPOSIT_BG_COLOR || "#f8f9fa";
+ 
   const depositTextColor = import.meta.env.VITE_APP_DEPOSIT_TEXT_COLOR || "#000000";
   const buttonColor = import.meta.env.VITE_APP_BUTTON_COLOR || "#007bff";
   const textRestrictColor = import.meta.env.VITE_APP_TEXT_RESTRICTED_COLOR || "#000000";
@@ -22,6 +22,8 @@ const Deposit = () => {
   const maxDeposit = import.meta.env.VITE_APP_MAX_DEPOSIT || 1000;
   const basicInterestRate = import.meta.env.VITE_APP_BASIC_INTEREST_RATE || 1.5;
   const contractAddress = import.meta.env.VITE_APP_INFURA_CONTRACT_ADDRESS;
+  const borderColor = import.meta.env.VITE_APP_DEPOSIT_CARD_BORDER_COLOR || "#dee2e6";
+  const borderColorYellow = import.meta.env.VITE_APP_DEPOSIT_CARD_BORDER_COLOR_YELLOW || "#FFFF00";
 
   const [amount, setAmount] = useState<string>("");
   const dailyRoi = basicInterestRate / 100;
@@ -101,23 +103,19 @@ const Deposit = () => {
     backgroundColor: buttonColor,
     color: "#fff",
     width: "100%",
+    
   };
 
   const cardStyle = {
-    boxShadow: "0 0.25rem 0.75rem rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 0.25rem 0.75rem rgba(6, 216, 239, 0.67)",
     backgroundColor: depositCardBgColor,
+    border: `1px solid ${borderColor}`,
+    
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-  //       <Spinner animation="grow" />
-  //     </div>
-  //   );
-  // }
 
   return (
-    <div id="deposit" className="py-5" style={{ backgroundColor: depositBgColor }}>
+    <div id="deposit" className="py-5" >
       <Container>
         <Row>
           <Col lg={6} md={12} className="mb-4 mb-lg-0">
@@ -125,22 +123,23 @@ const Deposit = () => {
             <Form>
               <Form.Group className="mb-3">
                 <div className="input-group">
-                  <Form.Control
+                  <Form.Control 
                     id="depositAmount"
                     type="number"
                     value={amount}
                     onChange={handleAmountChange}
                     placeholder={`${minDeposit} BNB`}
-                    style={{ height: "50px" }}
+                    style={{ height: "50px", borderColor:`4px solid ${borderColorYellow}` }}
                     min={minDeposit}
                     max={maxDeposit}
                   />
-                  <span className="input-group-text" style={{ height: "50px" }}>
+                  <span className="input-group-text" style={{ height: "50px",  }}>
                     BNB
                   </span>
                 </div>
               </Form.Group>
-              
+             
+              <div  style={{ width: '50%' }}>
               <Button
                 id="sendTransaction"
                 style={buttonStyle}
@@ -150,6 +149,8 @@ const Deposit = () => {
               >
                 Make Deposit
               </Button>
+              </div>
+              
 
               {investError && (
                 <div className="alert alert-danger">
@@ -183,8 +184,9 @@ const Deposit = () => {
               depositCardTextColor={depositCardTextColor}
               textRestrictColor={textRestrictColor}
               perDayIncome={returns.perDay}
-              percentRate={parseInt(data?.percentRate || "0") / 10}
+              percentRate={parseInt(data?.percentRate?.toString() || "0") / 10}
               totalIncome={returns.total}
+              borderColor={borderColor}
               data={data}
             />
           </Col>
@@ -208,7 +210,10 @@ const CardGroup = ({
   perDayIncome: string;
   percentRate: number;
   totalIncome: string;
-  data: any;
+  borderColor: string;
+  data: {
+    percentRate: string;
+  } | null;
 }) => (
   <>
     <CardSection

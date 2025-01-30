@@ -3,21 +3,21 @@ import { INFURA_API_URL, CONTRACT_ADDRESS, ABI } from "./constants";
 
 
 interface ContractData {
-  contractBalance: string;
-  totalDeposits: string;
-  totalUsers: string;
-  withdrawnData: string;
-  refRewards: string;
-  percentRate: string;
-  userAvailable: string;
-  userReferralBouns: string;
-  userDividends: string;
-  userTotalDeposit: string;
-  userProfit: string;
-  userTotalWithdrawn: string;
-  userPercentRate: string;
-  userTotalReward: string;
-  userTotalReferral: string;
+  contractBalance: number;
+  totalDeposits: number;
+  totalUsers: number;
+  withdrawnData: number;
+  refRewards: number;
+  percentRate: number;
+  userAvailable: number;
+  userReferralBouns: number;
+  userDividends: number;
+  userTotalDeposit: number;
+  userProfit: number;
+  userTotalWithdrawn: number;
+  userPercentRate: number;
+  userTotalReward: number;
+  userTotalReferral: number;
   userDownlineCountArray: number[];
   referralLink: string;
 }
@@ -28,7 +28,7 @@ export const fetchContractData = async (address: string): Promise<ContractData> 
   try {
     const provider = new ethers.JsonRpcProvider(INFURA_API_URL);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-    const walletAddress = import.meta.env.VITE_APP_WALLET_ADDRESS as string;
+
     const ownerAddress = import.meta.env.VITE_APP_OWNER_ADDRESS as string;
     const contractBalance = await contract.getContractBalance();
     const totalDeposits = await contract.totalInvested();
@@ -69,21 +69,21 @@ export const fetchContractData = async (address: string): Promise<ContractData> 
     }
 
     return {
-      contractBalance: ethers.formatEther(contractBalance),
-      totalDeposits: ethers.formatEther(totalDeposits),
-      totalUsers: totalUsers.toString(),
-      withdrawnData: ethers.formatEther(withdrawnData),
-      refRewards: ethers.formatEther(refRewards),
-      percentRate: percentRate.toString(),
-      userAvailable: ethers.formatEther(userAvailable),
-      userReferralBouns: ethers.formatEther(userReferralBouns),
-      userDividends: ethers.formatEther(userDividends),
-      userTotalDeposit: ethers.formatEther(userTotalDeposit),
-      userProfit: userProfit,
-      userTotalWithdrawn: ethers.formatEther(userTotalWithdrawn),
-      userPercentRate: userPercentRate.toString(),
-      userTotalReward: ethers.formatEther(userTotalReward),
-      userTotalReferral: userTotalReferral.toString(),
+      contractBalance: Number(ethers.formatEther(contractBalance)),
+      totalDeposits: Number(ethers.formatEther(totalDeposits)),
+      totalUsers: Number(totalUsers),
+      withdrawnData: Number(ethers.formatEther(withdrawnData)),
+      refRewards: Number(ethers.formatEther(refRewards)),
+      percentRate: Number(percentRate),
+      userAvailable: Number(ethers.formatEther(userAvailable)),
+      userReferralBouns: Number(ethers.formatEther(userReferralBouns)),
+      userDividends: Number(ethers.formatEther(userDividends)),
+      userTotalDeposit: Number(ethers.formatEther(userTotalDeposit)),
+      userProfit: Number(userProfit),
+      userTotalWithdrawn: Number(ethers.formatEther(userTotalWithdrawn)),
+      userPercentRate: Number(userPercentRate),
+      userTotalReward: Number(ethers.formatEther(userTotalReward)),
+      userTotalReferral: userTotalReferral,
       userDownlineCountArray: userDownlineCountArray.map((count: bigint) => Number(count)),
       referralLink: referralLinkElement,
     };
