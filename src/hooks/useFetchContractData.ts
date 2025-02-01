@@ -19,16 +19,26 @@ export const useFetchContractData = () => {
       try {
         const result = await fetchContractData(address || "");
        
-        setData(result);
-      } catch (err: any) {
-        setError(err.message || "An error occurred");
+        setData({
+          contractBalance: result.contractBalance.toString(),
+          totalDeposits: result.totalDeposits.toString(),
+          totalUsers: result.totalUsers.toString(),
+          withdrawnData: result.withdrawnData.toString(),
+          refRewards: result.refRewards.toString(),
+        });
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An error occurred");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [address]);
 
   return { data, loading, error };
 };

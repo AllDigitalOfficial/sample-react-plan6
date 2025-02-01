@@ -8,14 +8,14 @@ type ContractDataType = {
   totalUsers: number;
   withdrawnData: number;
   refRewards: number;
-  percentRate: string;
+  percentRate: number;
   userAvailable: number;
   userReferralBouns: number;
   userDividends: number;
   userTotalDeposit: number;
   userProfit: number;
   userTotalWithdrawn: number;
-  userPercentRate: string;
+  userPercentRate: number;
   userTotalReward: number;
   userTotalReferral: number;
   userDownlineCountArray: number[];
@@ -37,14 +37,14 @@ export const ContractDataProvider: React.FC<{ children: React.ReactNode }> = ({ 
     totalUsers: 0,
     withdrawnData: 0,
     refRewards: 0,
-    percentRate: "0",
+    percentRate: 0,
     userAvailable: 0,
     userReferralBouns: 0,
     userDividends: 0,
     userTotalDeposit: 0,
     userProfit: 0,
     userTotalWithdrawn: 0,
-    userPercentRate: "0",
+    userPercentRate: 0,
     userTotalReward: 0,
     userTotalReferral: 0,
     userDownlineCountArray: [],

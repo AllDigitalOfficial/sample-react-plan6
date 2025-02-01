@@ -20,6 +20,8 @@ const HeroSection = () => {
   const heroSectionTitleText = import.meta.env.VITE_APP_HEROSECTION_TITLE_TEXT || "BNB: Pioneering a decentralized tomorrow";
   const heroBgImage = import.meta.env.VITE_APP_HERO_BG_IMAGE || "./images/hero-bg.jpg";
   const borderColor = import.meta.env.VITE_APP_CARD_BORDER_COLOR || "#dee2e6";
+  const HoldBonus = import.meta.env.VITE_APP_HEROSECTION_PERSONAL_HOLD_BONUS || '0.1% for Every 24 hrs without withdrawal';
+  const AmountBalance = import.meta.env.VITE_APP_HEROSECTION_CONTRACT_AMOUNT_BONUS || '0.1% for Every 24 hrs without withdrawal';
  
 
   const buttonStyle = {
@@ -52,15 +54,15 @@ const HeroSection = () => {
             <div>
               <p className="mb-3">
                 <strong>Basic interest rate:</strong>{" "}
-                <span style={{ color: highlightTextColor }}>{basicInterestRate}% every 24 hrs</span>
+                <span style={{ color: highlightTextColor }}>{basicInterestRate}</span>
               </p>
               <p className="mb-3">
                 <strong>Personal hold-bonus:</strong>{" "}
-                <span style={{ color: highlightTextColor }}>+0.1% for every 24 hrs without withdrawal</span>
+                <span style={{ color: highlightTextColor }}>{HoldBonus}</span>
               </p>
               <p className="mb-3">
                 <strong>Contract total amount bonus:</strong>{" "}
-                <span style={{ color: highlightTextColor }}>+0.1% for every 500 BNB on platform address balance</span>
+                <span style={{ color: highlightTextColor }}>{AmountBalance}</span>
               </p>
             </div>
             <div className="d-flex gap-3 mt-4 justify-content-center">

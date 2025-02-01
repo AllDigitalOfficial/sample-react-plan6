@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
-import { WagmiConfig, createConfig } from 'wagmi';
+import { WagmiConfig,} from 'wagmi';
 import { Chain, arbitrum, mainnet,bscTestnet } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

@@ -11,7 +11,10 @@ const ReferralLinkData = () => {
   const { data } = useContractData();
   const { address, isConnected } = useAccount();
   // Get dynamic card data
-  const cards = getCardDataYourIncome(data);
+  const cards = getCardDataYourIncome({
+    ...data,
+    userPercentRate: data.userPercentRate.toString(),
+  });
 
   const bgColor = import.meta.env.VITE_APP_REFERRAL_LINK_BG_COLOR || "#f8f9fa";
   const textColor = import.meta.env.VITE_APP_REFERRAL_LINK_TEXT_COLOR || "#000000";

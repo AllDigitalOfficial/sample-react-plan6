@@ -184,10 +184,10 @@ const Deposit = () => {
               depositCardTextColor={depositCardTextColor}
               textRestrictColor={textRestrictColor}
               perDayIncome={returns.perDay}
-              percentRate={parseInt(data?.percentRate?.toString() || "0") / 10}
+              percentRate={(parseFloat(data?.percentRate?.toString() || "0")) / 10}
               totalIncome={returns.total}
               borderColor={borderColor}
-              data={data}
+              data={{ percentRate: data?.percentRate?.toString() || "0" }}
             />
           </Col>
         </Row>

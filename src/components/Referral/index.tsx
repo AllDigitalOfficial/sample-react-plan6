@@ -1,11 +1,21 @@
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import  { useState } from "react";
+import { Container, Row, Col, Card, Button, Alert} from "react-bootstrap";
 import { useContractData } from "../context/ContractDataContext";
-
 
 
 const Referral = () => {
   // Fetch contract data
   const { data } = useContractData();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleCopy = () => {
+    const referralLink = data?.referralLink || "";
+    navigator.clipboard.writeText(referralLink);
+    setShowAlert(true);
+
+    // Hide alert after 2 seconds
+    setTimeout(() => setShowAlert(false), 2000);
+  }
 
 
   const bgColor = import.meta.env.VITE_APP_REFERRAL_BG_COLOR || "#f8f9fa"; // Default background color
@@ -18,7 +28,7 @@ const Referral = () => {
   const borderBoxShadow = import.meta.env.VITE_APP_CARD_BOX_SHADOW_COLOR || "0 0.25rem 0.75rem rgba(13, 236, 236, 0.6)"; // Default border shadow color
 
 
-
+  
   return (
     <div className="roadmap-area py-5" style=
       {{
@@ -54,24 +64,31 @@ const Referral = () => {
                 transition: "all 0.3s ease",
               }}
               onMouseOver={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor =
-                  buttonHoverColor;
+                (e.target as HTMLButtonElement).style.backgroundColor = buttonHoverColor;
                 (e.target as HTMLButtonElement).style.color = "#fff";
               }}
               onMouseOut={(e) => {
-                (e.target as HTMLButtonElement).style.backgroundColor =
-                  "transparent";
+                (e.target as HTMLButtonElement).style.backgroundColor = "transparent";
                 (e.target as HTMLButtonElement).style.color = buttonColor;
               }}
-              onClick={() => {
-                const referralLink = data?.referralLink || "";
-                navigator.clipboard.writeText(referralLink);
-                
-              }}
+              onClick={handleCopy}
             >
               Copy
             </Button>
           </div>
+
+          {/* Alert for Copy */}
+          {showAlert && (
+            <Alert
+              variant="success"
+              className="position-fixed bottom-0 end-0 mb-3 me-3"
+              style={{ zIndex: 1050 }}
+              onClose={() => setShowAlert(false)}
+              dismissible
+            >
+              Referral link copied!
+            </Alert>
+          )}
 
           {/* Referral Stats Section */}
           <Row className="justify-content-center">
