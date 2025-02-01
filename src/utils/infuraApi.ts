@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { INFURA_API_URL, CONTRACT_ADDRESS, ABI } from "./constants";
+const referralLink = import.meta.env.VITE_APP_REFFERAL_LINK_DOMAIN || "You will get your ref link after investing"; // Default referral link
 
 
 interface ContractData {
@@ -59,7 +60,7 @@ export const fetchContractData = async (address: string): Promise<ContractData> 
     };
 
     const userProfit = calculatePercentage(userTotalWithdrawn, userTotalDeposit);
-    const generateReferralLink = (address: string): string => `https://bnbclub.pro?ref=${address}`;
+    const generateReferralLink = (address: string): string => `${referralLink}${address}`;
     const isOwner = address.toLowerCase() === ownerAddress.toLowerCase();
     const hasDeposits = Number(userTotalDeposit) > 0;
     let referralLinkElement = "You will get your ref link after investing";

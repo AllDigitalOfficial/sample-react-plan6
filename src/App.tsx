@@ -46,7 +46,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    document.title = import.meta.env.VITE_APP_TITLE || "Bnbclub";
+    document.title = import.meta.env.VITE_APP_TITLE || "BnbPie";
     const favicon = document.querySelector(
       "link[rel*='icon']"
     ) as HTMLLinkElement;
