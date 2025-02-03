@@ -14,7 +14,7 @@ const HeroSection = () => {
   const buttonOutlineColor = import.meta.env.VITE_APP_BUTTON_OUTLINE_COLOR || "#007bff";
   const contractBalanceColor = import.meta.env.VITE_APP_CONTRACT_BALANCE_COLOR || "#ffc107";
   const withdrawnColor = import.meta.env.VITE_APP_WITHDRAWN_COLOR || "#ffc107";
-  const presentationLink = import.meta.env.VITE_APP_PRESENTATION_LINK || "P3  PPTV.pdf";
+  const presentationLink = import.meta.env.VITE_PRESENTATION_LINK || "P3  PPTV.pdf";
  
   const basicInterestRate = import.meta.env.VITE_APP_BASIC_INTEREST_RATE || 1.5;
   const heroSectionTitleText = import.meta.env.VITE_APP_HEROSECTION_TITLE_TEXT || "BNB: Pioneering a decentralized tomorrow";
